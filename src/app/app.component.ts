@@ -59,7 +59,7 @@ export class AppComponent {
   }
 
   setActiveUser(){
-    this.activeUsername = this.username
+    this.activeUsername = this.username;
 
 }
 

@@ -18,14 +18,14 @@
       <div class="card-body">
         <h4 class="card-title">Users</h4>
         <p class="card-text">Active Users</p>
-        <form ngNativeValidate>
+        <form #uf="ngForm">
           <div class="form-group">
             <div class="displayName">
-            <input type="text" class="form-control" required minlength="5" [(ngModel)]="username" id="username" name="username"  placeholder="Display Name" >
+            <input type="text" class="form-control" required minlength="3" [(ngModel)]="username" id="username" name="username"  placeholder="Display Name" >
             </div>
 
             <div class="displayButton">
-            <button type="button" class="btn btn-primary" (click)="setActiveUser()">Set</button>
+            <button type="button" class="btn btn-primary" [disabled]="!uf.valid" (click)="setActiveUser()">Set</button>
             </div>
           </div>
         </form>
@@ -55,10 +55,12 @@
             </div>
         </div>
         </div>
+        <form #f="ngForm">
         <div class="form-group">
-          <textarea class="form-control" rows="3" [(ngModel)]="message" placeholder="Type a message..."id="message" name="message"></textarea>
-          <button type="button" id="send" class="btn btn-primary" (click)="sendMessage()">Send</button>
+          <textarea class="form-control" rows="3" required [(ngModel)]="message" placeholder="Type a message..."id="message" name="message"></textarea>
+          <button type="button" id="send" class="btn btn-primary" [disabled]="!f.valid" (click)="sendMessage()">Send</button>
         </div>
+        </form>
 
       </div>
     </div>
