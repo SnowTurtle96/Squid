@@ -1,26 +1,44 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { AppComponent } from './app.component';
-import {Observable} from "rxjs/Observable";
-import {environment} from "../environments/environment";
-import {AngularFireModule} from "angularfire2";
-import {AngularFirestore, AngularFirestoreModule} from "angularfire2/firestore";
-import {AngularFireDatabase, AngularFireDatabaseModule} from "angularfire2/database";
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {AppComponent} from './app.component';
+import {Observable} from 'rxjs/Observable';
+import {environment} from '../environments/environment';
+import {AngularFireModule} from 'angularfire2';
+import {AngularFirestore, AngularFirestoreModule} from 'angularfire2/firestore';
+import {AngularFireDatabase, AngularFireDatabaseModule} from 'angularfire2/database';
+import {SignupComponent} from './signup/signup.component';
+import {RouterModule, Routes} from '@angular/router';
+import {ChatComponent} from './chat/chat.component';
+import {AngularFireAuth} from 'angularfire2/auth';
+
+
+const appRoutes: Routes = [
+  {path: 'signup', component: SignupComponent},
+  {path: 'chat', component: ChatComponent}
+  // { path: '**', component: PageNotFoundComponent }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SignupComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(
+      appRoutes,
+      {enableTracing: false} // <-- debugging purposes only
+    ),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    FormsModule
+    FormsModule,
+
 
 
   ],
-  providers: [AngularFireDatabaseModule, AngularFireDatabase],
+  providers: [AngularFireDatabaseModule, AngularFireDatabase, AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule {
