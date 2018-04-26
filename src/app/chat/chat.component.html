@@ -1,6 +1,5 @@
-<!--Nav-->
+<body>
 <app-navbar></app-navbar>
-
 <!--Left-->
 <div class="row">
   <div class="col-md-2">
@@ -18,7 +17,7 @@
       <div class="card-body">
         <h4 class="card-title">Chatroom</h4>
         <div class="card">
-          <div style="overflow: scroll;" #scrollMe [scrollTop]="scrollMe.scrollHeight" class="card-body">
+          <div style="overflow: scroll; overflow-x: hidden;" #scrollMe [scrollTop]="scrollMe.scrollHeight" class="card-body">
             <div class="text-area">
               <ul>
                 <li *ngFor="let message of messages | async">
@@ -56,5 +55,5 @@
     </div>
   </div>
 </div>
-
+</body>
 

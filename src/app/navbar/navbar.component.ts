@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
   swapLogin() {
     if (this.loginFormState === true) {
       this.loginFormState = false;
-      this.loginText = 'Already have an account?"';
+      this.loginText = 'Already have an account?';
     }
     else {
       this.loginFormState = true;

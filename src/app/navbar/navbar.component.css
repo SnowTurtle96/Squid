@@ -1,3 +1,13 @@
 .float {
   float: right;
 }
+
+button{
+  margin-left:1.5em;
+}
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
