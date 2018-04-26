@@ -11,6 +11,8 @@ import {SignupComponent} from './signup/signup.component';
 import {RouterModule, Routes} from '@angular/router';
 import {ChatComponent} from './chat/chat.component';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {NavbarComponent} from './navbar/navbar.component';
+import {LoginComponent} from './login/login.component';
 
 
 const appRoutes: Routes = [
@@ -23,7 +25,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     SignupComponent,
-    ChatComponent
+    ChatComponent,
+    NavbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
