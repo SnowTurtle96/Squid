@@ -1,0 +1,60 @@
+<!--Nav-->
+<app-navbar></app-navbar>
+
+<!--Left-->
+<div class="row">
+  <div class="col-md-2">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Users</h4>
+        <p class="card-text">Active Users</p>
+        {{activeUsername}}
+      </div>
+    </div>
+  </div>
+  <!--Center-->
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Chatroom</h4>
+        <div class="card">
+          <div style="overflow: scroll;" #scrollMe [scrollTop]="scrollMe.scrollHeight" class="card-body">
+            <div class="text-area">
+              <ul>
+                <li *ngFor="let message of messages | async">
+                  <h5 class="username">{{ message.username}}</h5>
+                  <small class="timestamp">{{ message.timestamp | date: 'HH:MM'}}</small>
+                  <p>{{message.body}}</p>
+
+
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <form #f="ngForm">
+          <div class="form-group">
+            <textarea class="form-control" rows="3" required (keydown.enter)="onKeydown($event)" [(ngModel)]="message"
+                      placeholder="Type a message..." id="message" name="message"></textarea>
+            <button type="button" id="send" class="btn btn-primary" [disabled]="!f.valid" (click)="sendMessage()">Send
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <!--Right-->
+  <div class="col-md-2">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Feed</h4>
+        <p class="card-text">Example</p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+

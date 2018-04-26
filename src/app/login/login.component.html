@@ -1,0 +1,14 @@
+<form class="form-inline" #uf="ngForm">
+  <div class="form-group row">
+    <div class="form-group">
+      <div class="displayName">
+        <input type="text" class="form-control" [(ngModel)]="username" id="username" name="username"
+               placeholder="Username">
+        <input type="password" class="form-control" [(ngModel)]="password" id="password" name="password"
+               placeholder="Password">
+        <button type="button" class="btn btn-primary" [disabled]="!uf.valid" (click)="logIn()">Log In</button>
+        <!--<button type="button" class="btn btn-primary" [disabled]="!uf.valid" (click)="logOut()">Log Out</button>-->
+      </div>
+    </div>
+  </div>
+</form>

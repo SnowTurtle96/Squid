@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <img src="assets/squid.png" height="50" width="50">
+  <a class="navbar-brand" href="#">Squid</a>
+  <div *ngIf="activeUsername == 'Not logged in'">
+    <div class="collapse navbar-collapse" style="float:right;" id="navbarNavAltMarkup">
+      <div style="float:right" *ngIf="loginFormState">
+        <app-login></app-login>
+      </div>
+      <div style="float:right" *ngIf="loginFormState == false">
+        <app-signup></app-signup>
+      </div>
+    </div>
+    <button style="display:inline-block; float:right;" class="btn btn-primary" (click)="swapLogin()">{{loginText}}
+    </button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup" *ngIf="activeUsername != 'Not logged in'">
+    <div style="float:right">
+      <p>Logged in as {{activeUsername}}</p>
+      <button style="display:inline-block; float:right;" class="btn btn-primary" (click)="logout()">Logout</button>
+
+    </div>
+  </div>
+</nav>
