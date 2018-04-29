@@ -10,7 +10,7 @@ export class SignupComponent implements OnInit {
 
   public email;
   public passwordSignup;
-
+  public displayName;
   constructor() {
   }
 
