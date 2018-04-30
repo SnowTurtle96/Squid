@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import * as firebase from 'firebase';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {AngularFireDatabase} from "angularfire2/database";
 
 @Component({
   selector: 'app-chat',
@@ -19,10 +20,10 @@ export class ChatComponent implements OnInit {
   activeUsername;
   @ViewChild('scrollme') private myScrollContainer: ElementRef;
 
-  constructor(private afs: AngularFirestore, private firebaseAuth: AngularFireAuth) {
+  constructor(private afs: AngularFirestore, private firebaseAuth: AngularFireAuth, private db: AngularFireDatabase) {
     this.messages1 = this.afs.collection('Messages', ref => ref.orderBy('timestamp'));
     this.messages = this.messages1.valueChanges();
-    this.scrollToBottom();
+     this.scrollToBottom();
 
     firebaseAuth.authState.subscribe(user => {
       if (user) {
@@ -46,8 +47,18 @@ export class ChatComponent implements OnInit {
       } else {
         console.log('Users signed out');
         this.activeUsername = 'Not logged in';
+
       }
     });
+
+    let prescence = new Presence();
+    prescence = {
+      username: this.activeUsername,
+      status: 'online'
+    };
+
+    db.list("Users").push(prescence)
+
   }
 
 
@@ -113,4 +124,9 @@ class Message {
   username: String;
   body: String;
   timestamp: any;
+}
+
+class Presence {
+  username: String;
+  status: String;
 }
