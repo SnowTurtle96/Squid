@@ -24,11 +24,6 @@ export class ChatComponent implements OnInit {
     this.messages = this.messages1.valueChanges();
     this.scrollToBottom();
 
-    this.messages1.doc(document)
-      .set({
-        online: true,
-      }, {merge: true});
-
     firebaseAuth.authState.subscribe(user => {
       if (user) {
         console.log(user);
@@ -38,6 +33,7 @@ export class ChatComponent implements OnInit {
       }
     });
 
+    firebase.firestore().collection().doc('hi');
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         // User is signed in.
@@ -108,6 +104,7 @@ export class ChatComponent implements OnInit {
     } catch (err) {
     }
   }
+
 
 }
 
