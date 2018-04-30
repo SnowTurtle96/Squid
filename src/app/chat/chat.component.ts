@@ -54,7 +54,7 @@ export class ChatComponent implements OnInit {
 
       }
     });
-    
+
     let prescence = new Presence();
     prescence = {
       username: this.activeUsername,
