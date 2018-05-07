@@ -13,13 +13,13 @@ import {ChatComponent} from './chat/chat.component';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {NavbarComponent} from './navbar/navbar.component';
 import {LoginComponent} from './login/login.component';
-import {AngularFireDatabase, AngularFireDatabaseModule} from "angularfire2/database";
+import {AngularFireDatabase, AngularFireDatabaseModule} from 'angularfire2/database';
 
 
 const appRoutes: Routes = [
   {path: 'signup', component: SignupComponent},
-  {path: 'chat', component: ChatComponent}
-  // { path: '**', component: PageNotFoundComponent }
+  {path: 'chat', component: ChatComponent},
+  {path: '**', component: ChatComponent}
 ];
 
 @NgModule({

@@ -22,7 +22,7 @@
               <ul>
                 <li *ngFor="let message of messages | async">
                   <h5 class="username">{{ message.username}}</h5>
-                  <small class="timestamp">{{ message.timestamp | date: 'HH:MM'}}</small>
+                  <small class="timestamp">{{ message.timestamp | date: 'MMM dd HH:mm '}}</small>
                   <p>{{message.body}}</p>
 
 
