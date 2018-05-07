@@ -23,17 +23,14 @@ export class ChatComponent implements OnInit {
   constructor(private afs: AngularFirestore, private firebaseAuth: AngularFireAuth, private db: AngularFireDatabase) {
     this.messages1 = this.afs.collection('Messages', ref => ref.orderBy('timestamp'));
     this.messages = this.messages1.valueChanges();
-     this.scrollToBottom();
-
-    this.messages1.doc(document)
-      .set({
-        online: true,
-      }, {merge: true});
+    this.scrollToBottom();
 
     firebaseAuth.authState.subscribe(user => {
       if (user) {
         console.log(user);
         this.activeUsername = user.email;
+        this.setStatusToOnline();
+
       } else {
         this.activeUsername = 'Not logged in';
       }
@@ -54,15 +51,6 @@ export class ChatComponent implements OnInit {
 
       }
     });
-
-    let prescence = new Presence();
-    prescence = {
-      username: this.activeUsername,
-      status: 'online'
-    };
-
-    db.list("Users").push(prescence)
-
   }
 
 
@@ -120,8 +108,21 @@ export class ChatComponent implements OnInit {
     }
   }
 
-}
 
+  setStatusToOnline() {
+    let prescence = new Presence();
+    prescence = {
+      username: this.activeUsername,
+      status: 'online'
+    };
+    console.log("Online status set for " + this.activeUsername)
+    this.db.database.ref("Users").child(this.activeUsername).set(prescence)
+    // this.messages1.doc(document)
+    //   .set({
+    //     online: true,
+    //   }, {merge: true});
+  }
+}
 
 class Message {
   username: String;

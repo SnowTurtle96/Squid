@@ -16,7 +16,6 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Chatroom</h4>
-        <div class="card">
           <div style="overflow: scroll; overflow-x: hidden;" #scrollMe [scrollTop]="scrollMe.scrollHeight" class="card-body">
             <div class="text-area">
               <ul>
@@ -30,7 +29,6 @@
               </ul>
             </div>
           </div>
-        </div>
         <form #f="ngForm">
           <div class="form-group">
             <textarea class="form-control" rows="3" required (keydown.enter)="onKeydown($event)" [(ngModel)]="message"
@@ -39,8 +37,7 @@
             </button>
           </div>
         </form>
-
-      </div>
+        </div>
     </div>
   </div>
   <!--Right-->
