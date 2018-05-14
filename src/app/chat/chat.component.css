@@ -6,6 +6,9 @@ li {
   list-style-type: none;
 }
 
+.card{
+  box-shadow: 10px 10px 8px 10px #888888;
+}
 .timestamp {
   float: right;
   display: inline;
@@ -41,6 +44,7 @@ body{
   width:98%;
   margin:auto;
 }
+
 
 /*body {    background: linear-gradient(rebeccapurple, purple);*/
 /*}*/
