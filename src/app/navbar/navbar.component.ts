@@ -61,7 +61,16 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     firebase.auth().signOut();
-    this.prescence.setStatusToOffline(this.activeUsername, this.displayname);
+    console.log(this.activeUsername + this.displayname + 'has been logged out');
+    this.updateOnDisconnect();
   }
+
+  private updateOnDisconnect() {
+
+    this.prescence.sendStatusToServer(this.prescence.setStatusToOffline(this.activeUsername, this.displayname), this.displayname);
+
+  }
+
+
 
 }

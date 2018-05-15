@@ -4,13 +4,11 @@
 <div class="row">
   <div class="col-md-2">
     <div class="card">
-      <div class="card-body">
-        <div class="border-bottom">
+      <div class="card-body border-bottom" style="margin-bottom:5px;">
           <h4 class="card-title account">Account</h4>
           <h4 class="card-title displayName">{{displayName}}</h4>
-        </div>
       </div>
-      <div *ngFor="let user of users | async">
+      <div class="friends" *ngFor="let user of users | async">
         <p class="card-text friendsDisplay">{{ user.displayname }}</p>
 
         <i *ngIf="user.status == 'online'" class="fas fa-circle onlineIcon"></i>

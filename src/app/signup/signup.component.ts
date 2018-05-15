@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import * as firebase from 'firebase';
 import {AngularFireDatabase} from 'angularfire2/database';
+import {PrescenceService} from '../chat/prescence.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,7 @@ export class SignupComponent implements OnInit {
   public passwordSignup;
   public displayName;
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase, private prescence: PrescenceService) {
   }
 
   ngOnInit() {
@@ -30,7 +31,8 @@ export class SignupComponent implements OnInit {
         console.log(error);
       });
     });
-    this.db.database.ref().child(displayName);
+    this.db.database.ref('Accounts').child(displayName);
+    this.prescence.sendStatusToServer(this.prescence.setStatusToOnline(this.email, this.displayName), displayName);
 
   }
 

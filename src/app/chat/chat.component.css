@@ -48,6 +48,10 @@ li {
   padding: 1px;
 }
 
+.friends {
+  padding: 5px;
+}
+
 .displayName {
   display: inline;
   float: right;

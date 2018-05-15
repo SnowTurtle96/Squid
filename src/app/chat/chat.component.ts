@@ -4,6 +4,7 @@ import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firesto
 import * as firebase from 'firebase';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {AngularFireDatabase} from 'angularfire2/database';
+import {PrescenceService} from './prescence.service';
 
 @Component({
   selector: 'app-chat',
@@ -21,7 +22,7 @@ export class ChatComponent implements OnInit {
 
   @ViewChild('scrollme') private myScrollContainer: ElementRef;
 
-  constructor(private afs: AngularFirestore, private firebaseAuth: AngularFireAuth, private db: AngularFireDatabase) {
+  constructor(private afs: AngularFirestore, private firebaseAuth: AngularFireAuth, private db: AngularFireDatabase, private prescence: PrescenceService) {
     this.messages1 = this.afs.collection('Messages', ref => ref.orderBy('timestamp'));
     this.messages = this.messages1.valueChanges();
 
@@ -34,8 +35,8 @@ export class ChatComponent implements OnInit {
         this.activeUsername = user.email;
         this.displayName = user.displayName;
 
-        this.setStatusToOnline();
-        this.updateOnDisconnect();
+        this.prescence.setStatusToOnline(this.activeUsername, this.displayName);
+        this.prescence.updateOnDisconnect(this.activeUsername, this.displayName);
 
         //TODO
         // this.updateOnIdle();
@@ -108,44 +109,6 @@ export class ChatComponent implements OnInit {
     } catch (err) {
     }
   }
-
-  setStatusToOnline() {
-    let prescence = new Presence();
-    prescence = {
-      username: this.activeUsername,
-      status: 'online',
-      displayname: this.displayName
-
-    };
-
-    console.log('Online status set for ' + this.activeUsername);
-    this.db.database.ref('Accounts').child(this.displayName).set(prescence);
-  }
-
-  private updateOnDisconnect() {
-
-    this.db.database.ref('Accounts').child(this.displayName)
-      .onDisconnect()
-      .set(this.setStatusToOffline());
-  }
-
-  private setStatusToOffline(): Presence {
-    let prescence = new Presence();
-    prescence = {
-      username: this.activeUsername,
-      status: 'offline',
-      displayname: this.displayName
-    };
-    return prescence;
-  }
-
-  /// Helper to perform the update in Firebase
-  // private updateStatus(status: string) {
-  //   if (!this.userId) return
-  //
-  //   this.db.object(`users/` + this.userId).update({ status: status })
-  // }
-  //
 }
 
 
