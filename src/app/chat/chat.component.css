@@ -6,7 +6,7 @@ li {
   list-style-type: none;
 }
 
-.card{
+.card {
   box-shadow: 10px 10px 8px 10px #888888;
 }
 .timestamp {
@@ -18,6 +18,42 @@ li {
   display: inline;
 }
 
+.inline {
+
+}
+
+.onlineIcon {
+  float: right;
+  color: green;
+  font-size: 15px;
+  padding: 1px;
+}
+
+.offlineIcon {
+  float: right;
+  color: red;
+  font-size: 15px;
+  padding: 1px;
+
+}
+
+.account {
+  display: inline;
+  float: left;
+  padding: 1px;
+}
+
+.friendsDisplay {
+  display: inline;
+  padding: 1px;
+}
+
+.displayName {
+  display: inline;
+  float: right;
+  padding: 1px;
+
+}
 #displayButton {
 
 }
@@ -44,7 +80,6 @@ body{
   width:98%;
   margin:auto;
 }
-
 
 /*body {    background: linear-gradient(rebeccapurple, purple);*/
 /*}*/

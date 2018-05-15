@@ -7,7 +7,9 @@
                name="passwordSignup" placeholder="Password">
         <input type="text" class="form-control" [(ngModel)]="displayName" id="displayName"
                name="displayName" placeholder="Display Name">
-        <button type="button" class="btn btn-primary" [disabled]="!uf.valid" (click)="signUp()">Sign Up</button>
+        <button type="button" class="btn btn-primary" [disabled]="!uf.valid"
+                (click)="signUp(email, passwordSignup, displayName)">Sign Up
+        </button>
       </div>
     </div>
   </div>

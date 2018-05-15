@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'firebase';
+import {PrescenceService} from '../chat/prescence.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,14 +11,17 @@ import * as firebase from 'firebase';
 export class NavbarComponent implements OnInit {
 
   public activeUsername;
+  public displayname;
   public loginFormState = false;
   public loginText = 'Already have an account?';
 
-  constructor(private firebaseAuth: AngularFireAuth) {
+  constructor(private firebaseAuth: AngularFireAuth, private prescence: PrescenceService) {
     firebaseAuth.authState.subscribe(user => {
       if (user) {
         console.log(user);
         this.activeUsername = user.email;
+        this.displayname = user.displayName;
+
       } else {
         this.activeUsername = 'Not logged in';
       }
@@ -57,6 +61,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     firebase.auth().signOut();
+    this.prescence.setStatusToOffline(this.activeUsername, this.displayname);
   }
 
 }

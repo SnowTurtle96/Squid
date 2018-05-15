@@ -5,9 +5,18 @@
   <div class="col-md-2">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Users</h4>
-        <p class="card-text">Active Users</p>
-        {{activeUsername}}
+        <div class="border-bottom">
+          <h4 class="card-title account">Account</h4>
+          <h4 class="card-title displayName">{{displayName}}</h4>
+        </div>
+      </div>
+      <div *ngFor="let user of users | async">
+        <p class="card-text friendsDisplay">{{ user.displayname }}</p>
+
+        <i *ngIf="user.status == 'online'" class="fas fa-circle onlineIcon"></i>
+        <i *ngIf="user.status == 'offline'" class="fas fa-circle offlineIcon"></i>
+
+
       </div>
     </div>
   </div>
@@ -37,7 +46,7 @@
             </button>
           </div>
         </form>
-        </div>
+      </div>
     </div>
   </div>
   <!--Right-->

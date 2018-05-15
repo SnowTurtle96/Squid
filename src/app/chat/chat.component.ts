@@ -3,7 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import * as firebase from 'firebase';
 import {AngularFireAuth} from 'angularfire2/auth';
-import {AngularFireDatabase} from "angularfire2/database";
+import {AngularFireDatabase} from 'angularfire2/database';
 
 @Component({
   selector: 'app-chat',
@@ -13,35 +13,43 @@ import {AngularFireDatabase} from "angularfire2/database";
 export class ChatComponent implements OnInit {
 
   messages: Observable<Message[]>;
+  users: Observable<any[]>;
   message;
-  username;
-  passwordSignup;
   messages1: AngularFirestoreCollection<Message>;
   activeUsername;
+  displayName;
+
   @ViewChild('scrollme') private myScrollContainer: ElementRef;
 
   constructor(private afs: AngularFirestore, private firebaseAuth: AngularFireAuth, private db: AngularFireDatabase) {
     this.messages1 = this.afs.collection('Messages', ref => ref.orderBy('timestamp'));
     this.messages = this.messages1.valueChanges();
+
+    this.users = db.list('Accounts').valueChanges();
     this.scrollToBottom();
 
     firebaseAuth.authState.subscribe(user => {
       if (user) {
         console.log(user);
         this.activeUsername = user.email;
+        this.displayName = user.displayName;
+
         this.setStatusToOnline();
+        this.updateOnDisconnect();
+
+        //TODO
+        // this.updateOnIdle();
 
       } else {
         this.activeUsername = 'Not logged in';
       }
     });
 
-    // firebase.firestore().collection().doc('hi');
+
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         // User is signed in.
-        console.log(user.email + 'logged in');
-        console.log(user.uid + 'logged in');
+        console.log(user.displayName + 'logged in');
 
         this.activeUsername = user.email;
         this.activeUsername = firebase.auth().currentUser.email;
@@ -52,24 +60,17 @@ export class ChatComponent implements OnInit {
 
       }
     });
-
-    let prescence = new Presence();
-    prescence = {
-      username: this.activeUsername,
-      status: 'online'
-    };
-
-    db.list("Users").push(prescence)
-
   }
 
 
+
+
+
   sendMessage() {
-    console.log('thisisdeway' + firebase.auth().currentUser.email);
     let message = new Message();
     message = {
 
-      username: firebase.auth().currentUser.email,
+      username: firebase.auth().currentUser.displayName,
       body: this.message,
       timestamp: new Date()
     };
@@ -84,15 +85,6 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.scrollToBottom();
-  }
-
-  returnUser() {
-    return firebase.auth().currentUser.email;
-  }
-
-
-  test() {
-    console.log(firebase.auth().currentUser.email);
   }
 
 
@@ -110,7 +102,6 @@ export class ChatComponent implements OnInit {
     }
   }
 
-
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollToBottom = this.myScrollContainer.nativeElement.scrollHeight;
@@ -118,20 +109,43 @@ export class ChatComponent implements OnInit {
     }
   }
 
-
   setStatusToOnline() {
     let prescence = new Presence();
     prescence = {
       username: this.activeUsername,
-      status: 'online'
+      status: 'online',
+      displayname: this.displayName
+
     };
-    console.log("Online status set for " + this.activeUsername)
-    this.db.database.ref("Users").child(this.activeUsername).set(prescence)
-    // this.messages1.doc(document)
-    //   .set({
-    //     online: true,
-    //   }, {merge: true});
+
+    console.log('Online status set for ' + this.activeUsername);
+    this.db.database.ref('Accounts').child(this.displayName).set(prescence);
   }
+
+  private updateOnDisconnect() {
+
+    this.db.database.ref('Accounts').child(this.displayName)
+      .onDisconnect()
+      .set(this.setStatusToOffline());
+  }
+
+  private setStatusToOffline(): Presence {
+    let prescence = new Presence();
+    prescence = {
+      username: this.activeUsername,
+      status: 'offline',
+      displayname: this.displayName
+    };
+    return prescence;
+  }
+
+  /// Helper to perform the update in Firebase
+  // private updateStatus(status: string) {
+  //   if (!this.userId) return
+  //
+  //   this.db.object(`users/` + this.userId).update({ status: status })
+  // }
+  //
 }
 
 
@@ -144,4 +158,10 @@ class Message {
 class Presence {
   username: String;
   status: String;
+  displayname: String;
+}
+
+class Account {
+  status: String;
+  username: String;
 }

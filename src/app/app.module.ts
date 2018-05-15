@@ -14,6 +14,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {NavbarComponent} from './navbar/navbar.component';
 import {LoginComponent} from './login/login.component';
 import {AngularFireDatabase, AngularFireDatabaseModule} from 'angularfire2/database';
+import {PrescenceService} from './chat/prescence.service';
 
 
 const appRoutes: Routes = [
@@ -37,7 +38,6 @@ const appRoutes: Routes = [
       {enableTracing: false} // <-- debugging purposes only
     ),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireModule.initializeApp(environment.firebase),
 
     AngularFirestoreModule,
     FormsModule,
@@ -45,7 +45,7 @@ const appRoutes: Routes = [
 
 
   ],
-  providers: [AngularFireDatabaseModule, AngularFireDatabase, AngularFireAuth],
+  providers: [AngularFireDatabaseModule, AngularFireDatabase, AngularFireAuth, PrescenceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
