@@ -34,6 +34,13 @@ li {
   color: red;
   font-size: 15px;
   padding: 1px;
+}
+
+.awayIcon {
+  float: right;
+  color: yellow;
+  font-size: 15px;
+  padding: 1px;
 
 }
 

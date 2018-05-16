@@ -37,6 +37,7 @@ export class ChatComponent implements OnInit {
 
         this.prescence.setStatusToOnline(this.activeUsername, this.displayName);
         this.prescence.updateOnDisconnect(this.activeUsername, this.displayName);
+        this.prescence.updateOnIdle(this.activeUsername, this.displayName);
 
         //TODO
         // this.updateOnIdle();
