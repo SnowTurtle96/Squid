@@ -29,6 +29,7 @@ li {
   padding: 1px;
 }
 
+
 .offlineIcon {
   float: right;
   color: red;
@@ -48,6 +49,18 @@ li {
   display: inline;
   float: left;
   padding: 1px;
+  font-size: 30px;
+}
+
+.sendMessageField {
+  display: inline;
+}
+
+.sendMessageButton {
+  display: inline;
+  height: 70%;
+  width: 100%;
+  margin-top: 2em;
 }
 
 .friendsDisplay {
