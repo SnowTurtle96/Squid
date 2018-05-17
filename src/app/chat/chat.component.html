@@ -1,4 +1,6 @@
+
 <body>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
 <app-navbar></app-navbar>
 <!--Left-->
 
@@ -48,7 +50,9 @@
                 <button type="button" id="send" class="btn btn-primary sendMessageButton" [disabled]="!f.valid"
                         (click)="sendMessage()"><i class="fas fa-envelope" style="font-size:25px;"></i></button>
               </div>
-          </div>
+
+
+            </div>
           </div>
         </form>
       </div>
@@ -64,6 +68,18 @@
         <a href="#" class="card-link">Another link</a>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
   </div>
 </div>
 </body>

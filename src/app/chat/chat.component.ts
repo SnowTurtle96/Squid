@@ -11,6 +11,7 @@ import {PrescenceService} from './prescence.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
+
 export class ChatComponent implements OnInit {
 
   messages: Observable<Message[]>;
