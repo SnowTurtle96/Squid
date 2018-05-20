@@ -144,8 +144,27 @@ class Account {
 @Pipe({name: 'emoticon'})
 export class Emoticon implements PipeTransform {
   transform(value: string): string {
-    let transformedMessage = value.replace(':)', '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/confused-1.svg">');
+    let transformedMessage = value;
+    transformedMessage = transformedMessage.replace(/:\)/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/happy-1.svg">');
+    transformedMessage = transformedMessage.replace(/:A/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/angry.svg">');
+    transformedMessage = transformedMessage.replace(/:S/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/confused-1.svg">');
+    transformedMessage = transformedMessage.replace(/;\)/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/wink.svg">');
+    transformedMessage = transformedMessage.replace(/:P/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/confused-1.svg">');
+    transformedMessage = transformedMessage.replace(/-_-/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/bored-1.svg">');
+    transformedMessage = transformedMessage.replace(/:’\(/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/crying-1.svg">');
+    transformedMessage = transformedMessage.replace(/:V/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/embarrassed.svg">');
+    transformedMessage = transformedMessage.replace(/:$/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/in-love.svg">');
+    transformedMessage = transformedMessage.replace(/:^/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/kissing.svg">');
+    transformedMessage = transformedMessage.replace(/:I/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/ill.svg">');
+    transformedMessage = transformedMessage.replace(/>:\(/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/nerd.svg">');
+    transformedMessage = transformedMessage.replace(/:K/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/mad.svg">');
+    transformedMessage = transformedMessage.replace(/:\(/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/unhappy.svg" >');
+    // }
+
 
     return transformedMessage;
+
   }
+
+
 }
