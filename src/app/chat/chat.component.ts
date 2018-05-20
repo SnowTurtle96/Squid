@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, Pipe, PipeTransform, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import * as firebase from 'firebase';
@@ -9,7 +9,9 @@ import {PrescenceService} from './prescence.service';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ['./chat.component.css'],
+  encapsulation: ViewEncapsulation.None,
+
 })
 
 export class ChatComponent implements OnInit {
@@ -65,6 +67,14 @@ export class ChatComponent implements OnInit {
     });
   }
 
+  dropdown(emoticon) {
+    console.log(emoticon);
+    if (this.message == undefined) {
+      this.message = emoticon;
+    } else {
+      this.message += emoticon;
+    }
+  }
 
 
 
@@ -129,4 +139,13 @@ class Presence {
 class Account {
   status: String;
   username: String;
+}
+
+@Pipe({name: 'emoticon'})
+export class Emoticon implements PipeTransform {
+  transform(value: string): string {
+    let transformedMessage = value.replace(':)', '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/confused-1.svg">');
+
+    return transformedMessage;
+  }
 }

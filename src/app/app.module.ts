@@ -9,13 +9,12 @@ import {AngularFireModule} from 'angularfire2';
 import {AngularFirestore, AngularFirestoreModule} from 'angularfire2/firestore';
 import {SignupComponent} from './signup/signup.component';
 import {RouterModule, Routes} from '@angular/router';
-import {ChatComponent} from './chat/chat.component';
+import {ChatComponent, Emoticon} from './chat/chat.component';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {NavbarComponent} from './navbar/navbar.component';
 import {LoginComponent} from './login/login.component';
 import {AngularFireDatabase, AngularFireDatabaseModule} from 'angularfire2/database';
 import {PrescenceService} from './chat/prescence.service';
-
 
 const appRoutes: Routes = [
   {path: 'signup', component: SignupComponent},
@@ -29,7 +28,8 @@ const appRoutes: Routes = [
     SignupComponent,
     ChatComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    Emoticon
   ],
   imports: [
     BrowserModule,
@@ -45,7 +45,7 @@ const appRoutes: Routes = [
 
 
   ],
-  providers: [AngularFireDatabaseModule, AngularFireDatabase, AngularFireAuth, PrescenceService],
+  providers: [AngularFireDatabaseModule, AngularFireDatabase, AngularFireAuth, PrescenceService, Emoticon],
   bootstrap: [AppComponent]
 })
 export class AppModule {
