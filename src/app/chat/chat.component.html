@@ -1,4 +1,6 @@
+
 <body>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
 <app-navbar></app-navbar>
 <!--Left-->
 
@@ -31,7 +33,7 @@
                 <li *ngFor="let message of messages | async">
                   <h5 class="username">{{ message.username}}</h5>
                   <small class="timestamp">{{ message.timestamp | date: 'MMM dd HH:mm '}}</small>
-                  <p>{{message.body}}</p>
+                  <div id="messages" [innerHTML]="message.body | emoticon"></div>
                 </li>
               </ul>
             </div>
@@ -40,20 +42,68 @@
           <div class="form-group">
             <div class="row">
               <div class="col-md-11">
-            <textarea class="form-control sendMessageField" rows="3" required (keydown.enter)="onKeydown($event)"
+
+            <textarea class="form-control sendMessageField" [disabled]="displayName == 'Not Signed In'" rows="3"
+                      required (keydown.enter)="onKeydown($event)"
                       [(ngModel)]="message"
                       placeholder="Type a message..." id="message" name="message"></textarea>
               </div>
+
+
               <div class="col-md-1">
                 <button type="button" id="send" class="btn btn-primary sendMessageButton" [disabled]="!f.valid"
                         (click)="sendMessage()"><i class="fas fa-envelope" style="font-size:25px;"></i></button>
+
+                <div class="dropdown">
+                  <img class="btn btn-secondary dropdown-toggle dropDownSquid" type="button" id="dropdownMenuButton"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" src="../../assets/187129-emoticons/svg/happy-1.svg"/>
+
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <img class="dropdown-item emoticon dropdown-toggle"
+                         src="../../assets/187129-emoticons/svg/angry.svg" (click)="dropdown(':A')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle"
+                         src="../../assets/187129-emoticons/svg/happy-1.svg" (click)="dropdown(':)')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle"
+                         src="../../assets/187129-emoticons/svg/confused-1.svg" (click)="dropdown(':S')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle"
+                         src="../../assets/187129-emoticons/svg/surprised-1.svg" (click)="dropdown(':P')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle"
+                         src="../../assets/187129-emoticons/svg/bored-1.svg" (click)="dropdown('-_-')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle"
+                         src="../../assets/187129-emoticons/svg/crying-1.svg" (click)="dropdown(':’(')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle"
+                         src="../../assets/187129-emoticons/svg/embarrassed.svg" (click)="dropdown(':V')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle" src="../../assets/187129-emoticons/svg/ill.svg"
+                         (click)="dropdown(':I')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle"
+                         src="../../assets/187129-emoticons/svg/in-love.svg" (click)="dropdown(':$')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle"
+                         src="../../assets/187129-emoticons/svg/kissing.svg" (click)="dropdown(':^')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle" src="../../assets/187129-emoticons/svg/mad.svg"
+                         (click)="dropdown(':K')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle" src="../../assets/187129-emoticons/svg/nerd.svg"
+                         (click)="dropdown('>:(')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle"
+                         src="../../assets/187129-emoticons/svg/ninja.svg" (click)="dropdown(':N')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle"
+                         src="../../assets/187129-emoticons/svg/quiet.svg" (click)="dropdown(':Q')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle" src="../../assets/187129-emoticons/svg/sad.svg"
+                         (click)="dropdown(':(')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle"
+                         src="../../assets/187129-emoticons/svg/unhappy.svg" (click)="dropdown(':(')"/>
+                    <img class="dropdown-item emoticon dropdown-toggle" src="../../assets/187129-emoticons/svg/wink.svg"
+                         (click)="dropdown(';)')"/>
+                  </ul>
+                </div>
               </div>
-          </div>
+            </div>
           </div>
         </form>
       </div>
     </div>
   </div>
+
   <!--Right-->
   <div class="col-md-2">
     <div class="card">
@@ -66,5 +116,7 @@
     </div>
   </div>
 </div>
+
+
 </body>
 

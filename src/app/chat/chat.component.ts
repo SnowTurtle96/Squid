@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, Pipe, PipeTransform, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import * as firebase from 'firebase';
@@ -9,8 +9,11 @@ import {PrescenceService} from './prescence.service';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ['./chat.component.css'],
+  encapsulation: ViewEncapsulation.None,
+
 })
+
 export class ChatComponent implements OnInit {
 
   messages: Observable<Message[]>;
@@ -28,12 +31,15 @@ export class ChatComponent implements OnInit {
 
     this.users = db.list('Accounts').valueChanges();
     this.scrollToBottom();
+    this.displayName = 'Not Signed In';
+    this.message = 'Sign in to send a message';
 
     firebaseAuth.authState.subscribe(user => {
       if (user) {
         console.log(user);
         this.activeUsername = user.email;
         this.displayName = user.displayName;
+        this.message = '';
 
         this.prescence.setStatusToOnline(this.activeUsername, this.displayName);
         this.prescence.updateOnDisconnect(this.activeUsername, this.displayName);
@@ -64,6 +70,14 @@ export class ChatComponent implements OnInit {
     });
   }
 
+  dropdown(emoticon) {
+    console.log(emoticon);
+    if (this.message == undefined) {
+      this.message = emoticon;
+    } else {
+      this.message += emoticon;
+    }
+  }
 
 
 
@@ -128,4 +142,35 @@ class Presence {
 class Account {
   status: String;
   username: String;
+}
+
+@Pipe({name: 'emoticon'})
+export class Emoticon implements PipeTransform {
+  transform(value: string): string {
+    let transformedMessage = value;
+    transformedMessage = transformedMessage.replace(/:\)/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/happy-1.svg">');
+    transformedMessage = transformedMessage.replace(/:A/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/angry.svg">');
+    transformedMessage = transformedMessage.replace(/:S/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/confused-1.svg">');
+    transformedMessage = transformedMessage.replace(/;\)/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/wink.svg">');
+    transformedMessage = transformedMessage.replace(/:P/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/confused-1.svg">');
+    transformedMessage = transformedMessage.replace(/-_-/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/bored-1.svg">');
+    transformedMessage = transformedMessage.replace(/:’\(/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/crying-1.svg">');
+    transformedMessage = transformedMessage.replace(/:V/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/embarrassed.svg">');
+    transformedMessage = transformedMessage.replace(/:$/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/in-love.svg">');
+    transformedMessage = transformedMessage.replace(/:^/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/kissing.svg">');
+    transformedMessage = transformedMessage.replace(/:I/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/ill.svg">');
+    transformedMessage = transformedMessage.replace(/>:\(/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/nerd.svg">');
+    transformedMessage = transformedMessage.replace(/:K/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/mad.svg">');
+    transformedMessage = transformedMessage.replace(/:\(/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/unhappy.svg">');
+    transformedMessage = transformedMessage.replace(/:N/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/ninja.svg">');
+
+
+    // }
+
+
+    return transformedMessage;
+
+  }
+
+
 }
