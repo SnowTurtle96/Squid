@@ -59,8 +59,7 @@ li {
 
 .sendMessageButton {
   display: inline;
-  height: 70%;
-  width: 100%;
+  height: 40%;
   margin-top: 2em;
 }
 
@@ -82,7 +81,9 @@ li {
 }
 
 .dropDownSquid {
-  width: 50%;
+  display: inline;
+  padding: 0.3em;
+  height: 40%;
 }
 
 .friendsDisplay {
