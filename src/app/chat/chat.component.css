@@ -122,6 +122,10 @@ textarea {
   width: 100%;
 }
 
+#messages{
+  font-size: 14px;
+}
+
 body{
   width:98%;
   margin:auto;

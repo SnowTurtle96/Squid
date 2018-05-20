@@ -31,7 +31,7 @@
             <div class="text-area">
               <ul>
                 <li *ngFor="let message of messages | async">
-                  <h5 class="username">{{ message.username}}</h5>
+                  <h6 class="username">{{ message.username}}</h6>
                   <small class="timestamp">{{ message.timestamp | date: 'MMM dd HH:mm '}}</small>
                   <div id="messages" [innerHTML]="message.body | emoticon"></div>
                 </li>
