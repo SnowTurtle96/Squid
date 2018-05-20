@@ -158,7 +158,10 @@ export class Emoticon implements PipeTransform {
     transformedMessage = transformedMessage.replace(/:I/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/ill.svg">');
     transformedMessage = transformedMessage.replace(/>:\(/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/nerd.svg">');
     transformedMessage = transformedMessage.replace(/:K/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/mad.svg">');
-    transformedMessage = transformedMessage.replace(/:\(/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/unhappy.svg" >');
+    transformedMessage = transformedMessage.replace(/:\(/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/unhappy.svg">');
+    transformedMessage = transformedMessage.replace(/:N/g, '<img class="emoticonDisplay" src="../../assets/187129-emoticons/svg/ninja.svg">');
+
+
     // }
 
 
