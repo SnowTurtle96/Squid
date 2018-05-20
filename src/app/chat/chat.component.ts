@@ -31,12 +31,15 @@ export class ChatComponent implements OnInit {
 
     this.users = db.list('Accounts').valueChanges();
     this.scrollToBottom();
+    this.displayName = 'Not Signed In';
+    this.message = 'Sign in to send a message';
 
     firebaseAuth.authState.subscribe(user => {
       if (user) {
         console.log(user);
         this.activeUsername = user.email;
         this.displayName = user.displayName;
+        this.message = '';
 
         this.prescence.setStatusToOnline(this.activeUsername, this.displayName);
         this.prescence.updateOnDisconnect(this.activeUsername, this.displayName);
