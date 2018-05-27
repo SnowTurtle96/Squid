@@ -10,6 +10,7 @@ import {PrescenceService} from './prescence.service';
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
+  providers: [PrescenceService],
   encapsulation: ViewEncapsulation.None,
 
 })
