@@ -18,6 +18,7 @@ import {SharedService} from "./shared.service";
 export class ChatComponent implements OnInit {
 
   messages: Observable<Message[]>;
+  messagesSound;
   users: Observable<any[]>;
   message;
   messages1: AngularFirestoreCollection<Message>;
@@ -34,8 +35,16 @@ export class ChatComponent implements OnInit {
   constructor(private afs: AngularFirestore, private firebaseAuth: AngularFireAuth, private db: AngularFireDatabase, private prescence: PrescenceService, private shared: SharedService) {
     this.messages1 = this.afs.collection('Messages', ref => ref.orderBy('timestamp'));
     this.messages = this.messages1.valueChanges();
+    this.messagesSound = this.messages1.valueChanges().subscribe(data=>{
+      this.soundRecieved();
+    });
 
-    this.users = db.list('Accounts').valueChanges();
+    this.recieveSound.src = "../../assets/messageRecieved.wav";
+    this.recieveSound.load();
+    this.sendSound.src = "../../assets/messageSent.wav";
+    this.sendSound.load();
+
+    this.users = db.list('Accounts').valueChanges()
     this.scrollToBottom();
     this.displayName = 'Not Signed In';
     this.message = 'Sign in to send a message';
@@ -107,7 +116,7 @@ export class ChatComponent implements OnInit {
     console.log('message ran');
     this.message = '';
     this.scrollToBottom();
-
+    this.sendSound.play();
   }
 
 
@@ -136,6 +145,12 @@ export class ChatComponent implements OnInit {
     } catch (err) {
     }
   }
+
+  soundRecieved(){
+    this.recieveSound.play();
+  }
+
+
 }
 
 
