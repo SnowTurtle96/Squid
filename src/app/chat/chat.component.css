@@ -47,7 +47,7 @@ li {
 
 .account {
   display: inline;
-  float: left;
+  /*float: left;*/
   padding: 1px;
   font-size: 30px;
 }
@@ -61,7 +61,7 @@ li {
   display: inline;
   height: 45px;
   margin-top: 2em;
-  width:50px;
+  width:60px;
 }
 
 .emoticonDisplay {
@@ -84,7 +84,7 @@ li {
 .dropDownSquid {
   display: inline;
   height: 45px;
-  width:50px;
+  width:60px;
 }
 
 .friendsDisplay {
@@ -96,10 +96,18 @@ li {
   padding: 5px;
 }
 
+.displayname{
+  float:right;
+  padding-bottom:1em;
+}
+
+.friendListTitle{
+  padding-bottom:1em;
+}
 .displayName {
   display: inline;
   float: right;
-  padding: 1px;
+  padding-bottom:1em;
 
 }
 #displayButton {
@@ -139,9 +147,6 @@ body{
 
 }
 
-.friendListTitle{
-  padding-bottom:1em;
-}
 
 .activityTitle{
   padding-bottom:1em;
