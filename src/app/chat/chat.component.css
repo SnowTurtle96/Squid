@@ -59,8 +59,9 @@ li {
 
 .sendMessageButton {
   display: inline;
-  height: 40%;
+  height: 45px;
   margin-top: 2em;
+  width:50px;
 }
 
 .emoticonDisplay {
@@ -82,7 +83,8 @@ li {
 
 .dropDownSquid {
   display: inline;
-  height: 50px;
+  height: 45px;
+  width:50px;
 }
 
 .friendsDisplay {
@@ -131,5 +133,18 @@ body{
   margin:auto;
 }
 
+
+.chatroomTitle{
+  padding-bottom:1em;
+
+}
+
+.friendListTitle{
+  padding-bottom:1em;
+}
+
+.activityTitle{
+  padding-bottom:1em;
+}
 /*body {    background: linear-gradient(rebeccapurple, purple);*/
 /*}*/

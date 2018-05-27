@@ -25,6 +25,10 @@ export class ChatComponent implements OnInit {
   displayName;
   loading = true;
 
+  //AUDIO
+  recieveSound = new Audio();
+  sendSound = new Audio();
+
   @ViewChild('scrollme') private myScrollContainer: ElementRef;
 
   constructor(private afs: AngularFirestore, private firebaseAuth: AngularFireAuth, private db: AngularFireDatabase, private prescence: PrescenceService, private shared: SharedService) {

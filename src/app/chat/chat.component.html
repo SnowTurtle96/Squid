@@ -1,22 +1,21 @@
-
+<app-navbar></app-navbar>
 <body>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<app-navbar></app-navbar>
 <!--Left-->
 
 <div class="row">
   <div class="col-md-2">
     <div class="card">
-      <div class="card-body border-bottom" style="margin-bottom:5px;">
+      <div class="card-body border-bottom friendListTitle">
         <i class="fas fa-user account"></i>
         <h4 class="card-title displayName">{{displayName}}</h4>
       </div>
       <div class="friends" *ngFor="let user of users | async">
         <p class="card-text friendsDisplay">{{ user.displayname }}</p>
 
-        <i *ngIf="user.status == 'online'" class="fas fa-circle onlineIcon"></i>
-        <i *ngIf="user.status == 'offline'" class="fas fa-circle offlineIcon"></i>
-        <i *ngIf="user.status == 'away'" class="fas fa-circle awayIcon"></i>
+        <i *ngIf="user.status == 'online'" class="fas fa-circle onlineIcon" data-placement="left" title="Online"></i>
+        <i *ngIf="user.status == 'offline'" class="fas fa-circle offlineIcon" data-placement="left" title="Offline"></i>
+        <i *ngIf="user.status == 'away'" class="fas fa-circle awayIcon" data-placement="left" title="Away"></i>
 
 
       </div>
@@ -26,7 +25,7 @@
   <div class="col-md-8">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Chatroom</h4>
+        <h4 class="card-title chatroomTitle border-bottom">Chatroom</h4>
           <div style="overflow: scroll; overflow-x: hidden;" #scrollMe [scrollTop]="scrollMe.scrollHeight" class="card-body">
             <div class="text-area">
               <ul>
@@ -108,7 +107,7 @@
   <div class="col-md-2">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Feed</h4>
+        <h4 class="card-title border-bottom activityTitle">Activity</h4>
         <p class="card-text">Example</p>
         <a href="#" class="card-link">Card link</a>
         <a href="#" class="card-link">Another link</a>
