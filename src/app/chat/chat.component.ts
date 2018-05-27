@@ -23,6 +23,7 @@ export class ChatComponent implements OnInit {
   messages1: AngularFirestoreCollection<Message>;
   activeUsername;
   displayName;
+  loading = true;
 
   @ViewChild('scrollme') private myScrollContainer: ElementRef;
 

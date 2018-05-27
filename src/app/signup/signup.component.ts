@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
   public email;
   public passwordSignup;
   public displayName;
+  public errorMessage;
 
   constructor(private db: AngularFireDatabase, private prescence: PrescenceService) {
   }
@@ -26,11 +27,15 @@ export class SignupComponent implements OnInit {
   signUp(email, passwordSignup, displayName) {
     email = email.toString();
     passwordSignup = passwordSignup.toString();
-    firebase.auth().createUserWithEmailAndPassword(email, passwordSignup).then(function (user) {
+    firebase.auth().createUserWithEmailAndPassword(email, passwordSignup).catch( (err: firebase.FirebaseError) => {
+      console.log("Issue with sign in!" + err);
+      this.errorMessage = err;
+    }).then(function (user) {
       return user.updateProfile({
         displayName: displayName
-      }).catch(function (error) {
-        console.log(error);
+      }).catch( (err: firebase.FirebaseError) => {
+        console.log("Issue with sign in!" + err);
+        this.errorMessage = err;
       });
     });
     this.db.database.ref('Accounts').child(displayName);
