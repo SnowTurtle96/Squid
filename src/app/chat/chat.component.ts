@@ -5,12 +5,12 @@ import * as firebase from 'firebase';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {PrescenceService} from './prescence.service';
+import {SharedService} from "./shared.service";
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
-  providers: [PrescenceService],
   encapsulation: ViewEncapsulation.None,
 
 })
@@ -27,7 +27,7 @@ export class ChatComponent implements OnInit {
 
   @ViewChild('scrollme') private myScrollContainer: ElementRef;
 
-  constructor(private afs: AngularFirestore, private firebaseAuth: AngularFireAuth, private db: AngularFireDatabase, private prescence: PrescenceService) {
+  constructor(private afs: AngularFirestore, private firebaseAuth: AngularFireAuth, private db: AngularFireDatabase, private prescence: PrescenceService, private shared: SharedService) {
     this.messages1 = this.afs.collection('Messages', ref => ref.orderBy('timestamp'));
     this.messages = this.messages1.valueChanges();
 
@@ -35,6 +35,12 @@ export class ChatComponent implements OnInit {
     this.scrollToBottom();
     this.displayName = 'Not Signed In';
     this.message = 'Sign in to send a message';
+    this.shared.signedIn.subscribe(UIlog =>{
+      console.log(UIlog)
+      this.activeUsername = UIlog;
+      this.displayName = UIlog;
+    })
+
 
     firebaseAuth.authState.subscribe(user => {
       if (user) {

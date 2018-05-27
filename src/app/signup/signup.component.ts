@@ -2,12 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import * as firebase from 'firebase';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {PrescenceService} from '../chat/prescence.service';
-import {PrescenceSharedService} from '../chat/prescence-shared.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  providers: [PrescenceSharedService],
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {

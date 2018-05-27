@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import {PrescenceService} from '../chat/prescence.service';
+import {SharedService} from "../chat/shared.service";
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,7 @@ export class NavbarComponent implements OnInit {
   public loginFormState = false;
   public loginText = 'Already have an account?';
 
-  constructor(private firebaseAuth: AngularFireAuth, private prescence: PrescenceService) {
+  constructor(private firebaseAuth: AngularFireAuth, private prescence: PrescenceService, public shared: SharedService) {
     firebaseAuth.authState.subscribe(user => {
       if (user) {
         console.log(user);
@@ -25,6 +26,7 @@ export class NavbarComponent implements OnInit {
       } else {
         this.activeUsername = 'Not logged in';
       }
+
     });
 
     firebase.auth().onAuthStateChanged(function (user) {
@@ -63,6 +65,7 @@ export class NavbarComponent implements OnInit {
     firebase.auth().signOut();
     console.log(this.activeUsername + this.displayname + 'has been logged out');
     this.updateOnDisconnect();
+    this.shared.updateOnlineStatus();
   }
 
   private updateOnDisconnect() {

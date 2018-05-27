@@ -15,6 +15,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {LoginComponent} from './login/login.component';
 import {AngularFireDatabase, AngularFireDatabaseModule} from 'angularfire2/database';
 import {PrescenceService} from './chat/prescence.service';
+import {SharedService} from "./chat/shared.service";
 
 const appRoutes: Routes = [
   {path: 'signup', component: SignupComponent},
@@ -45,7 +46,7 @@ const appRoutes: Routes = [
 
 
   ],
-  providers: [AngularFireDatabaseModule, AngularFireDatabase, AngularFireAuth, PrescenceService, Emoticon],
+  providers: [AngularFireDatabaseModule, AngularFireDatabase, AngularFireAuth, PrescenceService, Emoticon, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
