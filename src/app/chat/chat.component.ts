@@ -5,7 +5,7 @@ import * as firebase from 'firebase';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {PrescenceService} from './prescence.service';
-import {SharedService} from "./shared.service";
+import {SharedService} from './shared.service';
 
 @Component({
   selector: 'app-chat',
@@ -28,7 +28,7 @@ export class ChatComponent implements OnInit {
 
   sendingMessageSoundFlag = false;
 
-  //AUDIO
+  // AUDIO
   recieveSound = new Audio();
   sendSound = new Audio();
   soundToPlay = new Audio();
@@ -41,9 +41,9 @@ export class ChatComponent implements OnInit {
     this.messages = this.messages1.valueChanges();
 
     this.messagesSound = this.messages1.valueChanges().subscribe(data=>{
-      console.log(this.sendingMessageSoundFlag)
+      console.log(this.sendingMessageSoundFlag);
       if(this.sendingMessageSoundFlag === true) {
-                console.log("yousentthis")
+        console.log('yousentthis');
         this.soundToPlay = this.sendSound;
         this.playSound();
         this.sendingMessageSoundFlag = false;
@@ -51,7 +51,6 @@ export class ChatComponent implements OnInit {
       }
        else{
         this.soundToPlay = this.recieveSound;
-        this.soundToPlay.
         this.playSound();
         console.log("someoneelsesentthis")
 
@@ -63,15 +62,15 @@ export class ChatComponent implements OnInit {
     this.recieveSound.src = "../../assets/messageRecieved.wav";
     this.recieveSound.load();
 
-    this.users = db.list('Accounts').valueChanges()
+    this.users = db.list('Accounts').valueChanges();
     this.scrollToBottom();
     this.displayName = 'Not Signed In';
     this.message = 'Sign in to send a message';
     this.shared.signedIn.subscribe(UIlog =>{
-      console.log(UIlog)
+      console.log(UIlog);
       this.activeUsername = UIlog;
       this.displayName = UIlog;
-    })
+    });
 
 
     firebaseAuth.authState.subscribe(user => {
@@ -84,9 +83,6 @@ export class ChatComponent implements OnInit {
         this.prescence.setStatusToOnline(this.activeUsername, this.displayName);
         this.prescence.updateOnDisconnect(this.activeUsername, this.displayName);
         this.prescence.updateOnIdle(this.activeUsername, this.displayName);
-
-        //TODO
-        // this.updateOnIdle();
 
       } else {
         this.activeUsername = 'Not logged in';

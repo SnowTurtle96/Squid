@@ -7,6 +7,8 @@
                placeholder="Username">
         <input type="password" class="form-control" [(ngModel)]="password" id="password" name="password"
                placeholder="Password">
+        <span *ngIf="error">{{error}}</span>
+
         <button type="button" class="btn btn-success"[disabled]="!uf.valid" (click)="logIn()">Log In</button>
         <!--<button type="button" class="btn btn-primary" [disabled]="!uf.valid" (click)="logOut()">Log Out</button>-->
       </div>
