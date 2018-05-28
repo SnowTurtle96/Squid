@@ -26,23 +26,42 @@ export class ChatComponent implements OnInit {
   displayName;
   loading = true;
 
+  sendingMessageSoundFlag = false;
+
   //AUDIO
   recieveSound = new Audio();
   sendSound = new Audio();
+  soundToPlay = new Audio();
+
 
   @ViewChild('scrollme') private myScrollContainer: ElementRef;
 
   constructor(private afs: AngularFirestore, private firebaseAuth: AngularFireAuth, private db: AngularFireDatabase, private prescence: PrescenceService, private shared: SharedService) {
     this.messages1 = this.afs.collection('Messages', ref => ref.orderBy('timestamp'));
     this.messages = this.messages1.valueChanges();
+
     this.messagesSound = this.messages1.valueChanges().subscribe(data=>{
-      this.soundRecieved();
+      console.log(this.sendingMessageSoundFlag)
+      if(this.sendingMessageSoundFlag === true) {
+                console.log("yousentthis")
+        this.soundToPlay = this.sendSound;
+        this.playSound();
+        this.sendingMessageSoundFlag = false;
+
+      }
+       else{
+        this.soundToPlay = this.recieveSound;
+        this.soundToPlay.
+        this.playSound();
+        console.log("someoneelsesentthis")
+
+      }
     });
 
-    this.recieveSound.src = "../../assets/messageRecieved.wav";
-    this.recieveSound.load();
     this.sendSound.src = "../../assets/messageSent.wav";
     this.sendSound.load();
+    this.recieveSound.src = "../../assets/messageRecieved.wav";
+    this.recieveSound.load();
 
     this.users = db.list('Accounts').valueChanges()
     this.scrollToBottom();
@@ -116,7 +135,7 @@ export class ChatComponent implements OnInit {
     console.log('message ran');
     this.message = '';
     this.scrollToBottom();
-    this.sendSound.play();
+    this.sendingMessageSoundFlag = true;
   }
 
 
@@ -146,8 +165,8 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  soundRecieved(){
-    this.recieveSound.play();
+  playSound(){
+    this.soundToPlay.play();
   }
 
 
